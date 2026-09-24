@@ -1,0 +1,4 @@
+admin123@healthops.local / 12345678
+
+https://thinksdet.com/login
+Organization created successfully. Sign in with your administrator account, then share your team registration link from the dashboard.

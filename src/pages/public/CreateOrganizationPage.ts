@@ -31,10 +31,11 @@ export class CreateOrganizationPage {
         if (data.workspaceCode) {
             await this.workSpaceCode.fill(data.workspaceCode)
         }
-        await this.adminFirstName.fill(data.adminFirstName);
-        await this.adminLastName.fill(data.adminLastName);
-        await this.adminEmail.fill(data.adminEmail);
-        await this.password.fill(data.password);
-        await this.confirmPassword.fill(data.confirmPassword);
+        await this.adminFirstName.fill(data.adminFirstName)
+        await this.adminLastName.fill(data.adminLastName)
+        await this.adminEmail.fill(data.adminEmail)
+        await this.password.fill(data.password)
+        await this.confirmPassword.fill(data.confirmPassword)
+        await this.createOrganizationButton.click()
     }
 }
