@@ -10,7 +10,9 @@ test('[MOD-AUTH-001] should onboard organization via UI and sign in as admin @P0
     await landingPage.navigateToCreateOrganization()
     const organizationData = OrganizationDataFactory.validOrganization();
     await createOrgPage.createOrganization(organizationData)
-    await expect(page).toHaveURL("thinksdet.com/login")
     await expect(loginPage.organizationCreatedMessage).toHaveText(LoginMessages.organizationCreated)
+    await expect(page).toHaveURL("https://thinksdet.com/login")
+    await loginPage.login(organizationData.adminEmail,organizationData.password)
+    await expect(page).toHaveURL("https://thinksdet.com/dashboard")
 })
 })
