@@ -1,0 +1,20 @@
+{
+  "validOrganization": {
+    "organizationName": "",
+    "workspaceCode": "",
+    "adminFirstName": "John",
+    "adminLastName": "Smith",
+    "adminEmail": "",
+    "password": "Test@12345",
+    "confirmPassword": "Test@12345"
+  },
+  "withoutWorkspaceCode": {
+    "organizationName": "",
+    "workspaceCode": "",
+    "adminFirstName": "Michael",
+    "adminLastName": "Brown",
+    "adminEmail": "",
+    "password": "Test@12345",
+    "confirmPassword": "Test@12345"
+  }
+}
