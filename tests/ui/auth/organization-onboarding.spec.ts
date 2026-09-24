@@ -7,8 +7,7 @@ test('[MOD-AUTH-001] should onboard organization via UI and sign in as admin @P0
     await page.goto("https://thinksdet.com/")
     await landingPage.navigateToCreateOrganization()
     const organizationData = OrganizationDataFactory.validOrganization();
-    await createOrgPage.createOrganization(organizationData.organizationName,organizationData.adminFirstName,
-        organizationData.adminLastName,organizationData.adminEmail,organizationData.password,organizationData.confirmPassword,organizationData.workspaceCode
-    )
+    await createOrgPage.createOrganization(organizationData)
+    await page.waitForTimeout(30000)
 })
 })

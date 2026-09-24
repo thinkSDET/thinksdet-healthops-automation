@@ -1,4 +1,5 @@
 import { Locator, Page } from "playwright"
+import { OrganizationData } from "../../types/OrganizationData"
 
 export class CreateOrganizationPage {
 
@@ -24,17 +25,16 @@ export class CreateOrganizationPage {
         this.createOrganizationButton = page.getByRole('button', { name: 'Create Organization' })
     }
 
-    async createOrganization(orgname: string, adminFN: string, adminLn: string, adminEmail: string, password: string,
-        confirmPassword: string, workSpaceCode?: string) {
+    async createOrganization(data: OrganizationData) {
 
-        await this.organizationName.fill(orgname)
-        if (workSpaceCode) {
-            await this.workSpaceCode.fill(workSpaceCode)
+        await this.organizationName.fill(data.organizationName)
+        if (data.workspaceCode) {
+            await this.workSpaceCode.fill(data.workspaceCode)
         }
-        await this.adminFirstName.fill(adminFN)
-        await this.adminLastName.fill(adminLn)
-        await this.adminEmail.fill(adminEmail)
-        await this.password.fill(password)
-        await this.confirmPassword.fill(confirmPassword)
+        await this.adminFirstName.fill(data.adminFirstName);
+        await this.adminLastName.fill(data.adminLastName);
+        await this.adminEmail.fill(data.adminEmail);
+        await this.password.fill(data.password);
+        await this.confirmPassword.fill(data.confirmPassword);
     }
 }
