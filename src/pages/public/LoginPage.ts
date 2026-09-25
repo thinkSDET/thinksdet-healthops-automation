@@ -7,6 +7,7 @@ export class LoginPage {
     readonly emailAddress: Locator
     readonly password: Locator
     readonly signIn: Locator
+    readonly getStartedWithHealthOps : Locator
 
     constructor(page: Page) {
         this.page = page
@@ -14,12 +15,17 @@ export class LoginPage {
         this.emailAddress = page.getByPlaceholder('Enter your email')
         this.password = page.getByPlaceholder('Enter your password')
         this.signIn = page.locator("#loginSubmit")
+        this.getStartedWithHealthOps = page.getByRole('button',{name : 'Get started with HealthOps'})
     }
 
     async login(emailAddress: string, password: string) {
         await this.emailAddress.pressSequentially(emailAddress, { delay: 100 })
         await this.password.pressSequentially(password, { delay: 100 })
         await this.signIn.click()
+    }
+
+    async navigateToGetStartedWithHealthOps(){
+        await this.getStartedWithHealthOps.click()
     }
 
 }
