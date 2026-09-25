@@ -13,6 +13,7 @@ export class CreateOrganizationPage {
     readonly confirmPassword: Locator
     readonly createOrganizationButton: Locator
     readonly workSpaceCodeAlert : Locator
+    readonly invalidWorkspaceCode : Locator
 
     constructor(page: Page) {
         this.page = page
@@ -25,6 +26,7 @@ export class CreateOrganizationPage {
         this.confirmPassword = page.getByRole('textbox', { name: 'Confirm Password' })
         this.createOrganizationButton = page.getByRole('button', { name: 'Create Organization' })
         this.workSpaceCodeAlert = page.getByText('Workspace code is already in use',{exact : true})
+        this.invalidWorkspaceCode = page.getByText('Workspace code may only contain lowercase letters, numbers, and hyphens',{exact : true})
     }
 
     async createOrganization(data: OrganizationData) {

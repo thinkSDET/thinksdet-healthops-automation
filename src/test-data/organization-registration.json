@@ -16,5 +16,8 @@
     "adminEmail": "",
     "password": "Test@12345",
     "confirmPassword": "Test@12345"
+  },
+   "invalidWorkspaceCode": {
+    "workspaceCode": "work space"
   }
 }
