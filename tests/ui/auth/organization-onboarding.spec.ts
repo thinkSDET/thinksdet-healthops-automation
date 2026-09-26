@@ -13,7 +13,6 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
             await page.goto('https://thinksdet.com/');
             await landingPage.navigateToCreateOrganization();
         });
-
         await test.step('Create organization', async () => {
             organizationData = OrganizationDataFactory.validOrganization();
             await createOrgPage.createOrganization(organizationData);
@@ -23,20 +22,17 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
                 LoginMessages.organizationCreated
             );
         });
-
         await test.step('Verify organization creation redirects to login', async () => {
             await expect(page).toHaveURL(
                 'https://thinksdet.com/login'
             );
         });
-
         await test.step('Login as organization admin', async () => {
             await loginPage.login(
                 organizationData.adminEmail,
                 organizationData.password
             );
         });
-
         await test.step('Verify dashboard is displayed', async () => {
             await expect(page).toHaveURL(
                 'https://thinksdet.com/dashboard'
