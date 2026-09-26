@@ -1,12 +1,12 @@
 import { expect } from 'playwright/test';
 import { test } from '../../../src/fixtures/pageObjectFixture'
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
-import { OrganizationDataFactory } from '../../../src/utils/OrganizationDataFactory';
+import { TestDataFactory } from '../../../src/utils/TestDataFactory';
 import { LoginPage } from '../../../src/pages/public/LoginPage';
 
 test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @tc:MOD-AUTH-010', async ({ page, landingPage, createOrgPage, loginPage, dashboardPage }) => {
-    const organizationData = OrganizationDataFactory.validOrganization();
-    const patientRegistration = OrganizationDataFactory.patientRegstration()
+    const organizationData = TestDataFactory.validOrganization();
+    const patientRegistration = TestDataFactory.patientRegstration()
 
     await test.step('Open app and create organization', async () => {
         await page.goto('https://thinksdet.com/');
