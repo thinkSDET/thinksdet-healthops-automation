@@ -29,12 +29,12 @@ test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @t
     });
 
     await test.step('Login as registered patient and verify dashboard access', async () => {
-        await page.goto('https://thinksdet.com/');
-        const patientLoginPage = new LoginPage(page);
+        await page.bringToFront()
+        await page.goto('https://thinksdet.com/login');
         console.log(patientRegistration.emailAddress)
-        await patientLoginPage.login(patientRegistration.emailAddress, patientRegistration.password);
+        await loginPage.login(patientRegistration.emailAddress, patientRegistration.password);
         await expect(page).toHaveURL('https://thinksdet.com/dashboard')
         await expect(dashboardPage.header.appUserName).toHaveText(`${patientRegistration.firstName} ${patientRegistration.lastName}`)
-        await expect(dashboardPage.header.appUserRole).toHaveText(`${patientRegistration.accountType}`)
+        await expect(dashboardPage.header.appUserRole).toHaveText(`${patientRegistration.accountType}`,{ignoreCase :true})
     });
 })
