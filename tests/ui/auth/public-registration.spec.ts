@@ -1,9 +1,7 @@
 import { expect } from 'playwright/test';
 import { test } from '../../../src/fixtures/pageObjectFixture'
-import { DashboardPage } from '../../../src/pages/Dashboard/DashboardPage';
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
 import { OrganizationDataFactory } from '../../../src/utils/OrganizationDataFactory';
-import { LoginMessages } from '../../../src/constants/LoginMessages';
 import testData from '../../../src/test-data/public-registration.json'
 import { LoginPage } from '../../../src/pages/public/LoginPage';
 
