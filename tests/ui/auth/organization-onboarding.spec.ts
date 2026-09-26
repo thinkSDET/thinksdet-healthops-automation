@@ -1,6 +1,6 @@
 import { expect } from 'playwright/test'
 import { test } from '../../../src/fixtures/pageObjectFixture'
-import { OrganizationDataFactory } from '../../../src/utils/OrganizationDataFactory'
+import { TestDataFactory } from '../../../src/utils/TestDataFactory'
 import { LoginMessages } from '../../../src/constants/LoginMessages'
 import { createOrganization } from '../../../src/constants/CreateOrganization'
 import testData from '../../../src/test-data/organization-registration.json'
@@ -14,7 +14,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create organization', async () => {
-            organizationData = OrganizationDataFactory.validOrganization();
+            organizationData = TestDataFactory.validOrganization();
             await createOrgPage.createOrganization(organizationData);
             await expect(
                 loginPage.organizationCreatedMessage
@@ -47,7 +47,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create an existing organization', async () => {
-            const existingOrganization = OrganizationDataFactory.validOrganization();
+            const existingOrganization = TestDataFactory.validOrganization();
             await createOrgPage.createOrganization(existingOrganization);
             existingWorkspaceCode = existingOrganization.workspaceCode;
             await expect(loginPage.organizationCreatedMessage).toHaveText(LoginMessages.organizationCreated);
@@ -55,7 +55,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         await test.step('Submit organization with duplicate workspace code', async () => {
             await loginPage.navigateToGetStartedWithHealthOps();
             await landingPage.navigateToCreateOrganization();
-            const duplicateOrganization = OrganizationDataFactory.validOrganization();
+            const duplicateOrganization = TestDataFactory.validOrganization();
             duplicateOrganization.workspaceCode = existingWorkspaceCode;
             await createOrgPage.createOrganization(duplicateOrganization);
         });
@@ -68,7 +68,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
 
         await page.goto('https://thinksdet.com/');
         await landingPage.navigateToCreateOrganization();
-        const organizationData  = OrganizationDataFactory.validOrganization();
+        const organizationData  = TestDataFactory.validOrganization();
         organizationData.workspaceCode = testData.invalidWorkspaceCode.workspaceCode
         await createOrgPage.createOrganization(organizationData );
         await expect(createOrgPage.invalidWorkspaceCode).toHaveText(createOrganization.invalidWorkspaceCode)

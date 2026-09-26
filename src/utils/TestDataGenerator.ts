@@ -11,4 +11,8 @@ export class TestDataGenerator {
     static generateAdminEmail(): string {
         return `admin${Date.now()}@healthops.com`;
     }
+
+    static generatePatientEmail():string{
+        return `patinet${Date.now()}@healthops.com`
+    }
 }
