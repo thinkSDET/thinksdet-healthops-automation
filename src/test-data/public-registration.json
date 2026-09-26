@@ -1,0 +1,38 @@
+{
+    "patientRegistration": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "emailAddress": "john110.doe@example.com",
+        "password": "Test@1234",
+        "confirmPassword": "Test@1234",
+        "phoneNumber": "9876543210",
+        "address": "123 Main Street",
+        "dateOfBirth": "1990-01-01",
+        "accountType": "Patient",
+        "gender": "Male"
+    },
+    "doctorRegistration": {
+        "firstName": "Emily",
+        "lastName": "Smith",
+        "emailAddress": "emily.smith@example.com",
+        "password": "Doctor@123",
+        "confirmPassword": "Doctor@123",
+        "phoneNumber": "9123456780",
+        "address": "45 Wellness Avenue",
+        "dateOfBirth": "1985-05-15",
+        "accountType": "Doctor",
+        "gender": "Female"
+    },
+    "pharmacistRegistration": {
+        "firstName": "Michael",
+        "lastName": "Brown",
+        "emailAddress": "michael.brown@example.com",
+        "password": "Pharma@123",
+        "confirmPassword": "Pharma@123",
+        "phoneNumber": "9988776655",
+        "address": "78 Care Plaza",
+        "dateOfBirth": "1988-11-22",
+        "accountType": "Pharmacist",
+        "gender": "Male"
+    }
+}
