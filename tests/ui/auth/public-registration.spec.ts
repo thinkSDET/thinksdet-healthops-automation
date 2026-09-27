@@ -9,7 +9,7 @@ test.skip('[MOD-AUTH-010] should register a patient into an existing workspace @
     const patientRegistration = TestDataFactory.patientRegstration()
 
     await test.step('Open app and create organization', async () => {
-        await page.goto('');
+        await page.goto(Routes.HOME);
         await landingPage.navigateToCreateOrganization();
         await createOrgPage.createOrganization(organizationData);
     });
