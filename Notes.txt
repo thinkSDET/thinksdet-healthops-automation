@@ -10,4 +10,4 @@ adminLN@healthops.com
 12345678
 
 
-1. Test case name, naming converntions ka rule
+1. Test case name, naming converntions ka rule.
