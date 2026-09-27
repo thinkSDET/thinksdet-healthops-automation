@@ -1,10 +1,17 @@
 {
   "dependencies": {
+    "dotenv": "^18.0.4",
     "playwright": "^1.63.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^26.6.1"
+    "@types/node": "^26.6.3",
+    "cross-env": "^10.1.0"
   },
-  "scripts": {}
+  "scripts": {
+    "test:run": "npx playwright test",
+    "test:qa": "cross-env ENV=qa playwright test",
+    "test:stage": "cross-env ENV=stage playwright test",
+     "test:preprod": "cross-env ENV=preprod playwright test"
+  }
 }

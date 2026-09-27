@@ -1,4 +1,7 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+import { environment } from "./src/config/environment";
+import { browserProjects } from "./src/config/browsers";
+import { runtime } from "./src/config/execution";
 
 /**
  * Read environment variables from file.
@@ -8,68 +11,52 @@ import { defineConfig, devices } from '@playwright/test';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+// Parse the browser value from runtime so a single browser or a browser set can be executed.
+// Example: BROWSER=chromium,firefox or BROWSER=all.
+const requestedBrowsers = (runtime.browser || (process.env.CI ? 'all' : 'chromium'))
+  .split(',')
+  .map((browser) => browser.trim().toLowerCase())
+  .filter(Boolean);
+
+// Build the final Playwright project list.
+// If "all" is requested, run every browser defined in browserProjects.
+// Otherwise, map only the requested browser names to their project configs.
+const selectedProjects = requestedBrowsers.includes('all')
+  ? Object.values(browserProjects)
+  : requestedBrowsers
+      .map((browser) => browserProjects[browser as keyof typeof browserProjects])
+      .filter((project): project is (typeof browserProjects)[keyof typeof browserProjects] => !!project);
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
-  /* Run tests in files in parallel */
+  // Run test files in parallel to reduce total execution time.
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  // Stop execution in CI if someone accidentally leaves test.only in the suite.
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
+  // Retry failed tests only in CI to make pipelines more stable.
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  // Use runtime-defined worker count so local and CI parallelism can be tuned separately.
+  workers: runtime.workers,
+  // Default HTML reporter is enough for local debugging and basic test result review.
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  // Shared settings used by all selected projects.
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    headless :false
+    // baseURL is chosen from the current environment (qa/stage/preprod).
+    baseURL: environment[runtime.env as keyof typeof environment],
+    // Headless mode is controlled centrally from runtime settings.
+    headless: runtime.headless,
+    // Capture screenshots, videos, and traces only when failure occurs to save time and disk.
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    trace: "retain-on-failure"
   },
 
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
-  ],
+  // Select the browser projects dynamically.
+  // If a browser list is invalid or empty, fall back to all defined browser projects.
+  projects: selectedProjects.length > 0 ? selectedProjects : Object.values(browserProjects),
 
   /* Run your local dev server before starting the tests */
   // webServer: {

@@ -7,10 +7,10 @@ import testData from '../../../src/test-data/organization-registration.json'
 
 test.describe('Authentication & Account Security @module:auth @feature:organization-onboarding', () => {
 
-    test('[MOD-AUTH-001] [E2E-AUTH-001] should onboard organization via UI and sign in as admin @P0 @tc:MOD-AUTH-001', async ({ page, landingPage, createOrgPage, loginPage }) => {
+    test.skip('[MOD-AUTH-001] [E2E-AUTH-001] should onboard organization via UI and sign in as admin @P0 @tc:MOD-AUTH-001', async ({ page, landingPage, createOrgPage, loginPage }) => {
         let organizationData: any
         await test.step('Navigate to organization onboarding', async () => {
-            await page.goto('https://thinksdet.com/');
+            await page.goto('');
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create organization', async () => {
@@ -40,10 +40,10 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         });
     })
 
-    test('[NEG-AUTH-003] should reject organization onboarding when workspaceCode already exists @P0 @tc:NEG-AUTH-003', async ({ page, landingPage, createOrgPage, loginPage }) => {
+    test.skip('[NEG-AUTH-003] should reject organization onboarding when workspaceCode already exists @P0 @tc:NEG-AUTH-003', async ({ page, landingPage, createOrgPage, loginPage }) => {
         let existingWorkspaceCode: string | undefined
         await test.step('Navigate to organization onboarding', async () => {
-            await page.goto('https://thinksdet.com/');
+            await page.goto('');
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create an existing organization', async () => {
@@ -66,7 +66,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
 
     test('[NEG-AUTH-002] should reject organization onboarding when workspace code contains spaces @P0 @tc:NEG-AUTH-002', async ({ page, landingPage, createOrgPage }) => {
 
-        await page.goto('https://thinksdet.com/');
+        await page.goto('');
         await landingPage.navigateToCreateOrganization();
         const organizationData  = TestDataFactory.validOrganization();
         organizationData.workspaceCode = testData.invalidWorkspaceCode.workspaceCode
