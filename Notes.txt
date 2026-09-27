@@ -16,14 +16,3 @@ Scott123@healthops.com / 12345678 -> Patient
 1. Test case name, naming converntions ka rule.
 
 
-Add explicit visibility assertions before clicking each quick-access card.
-Assert on page content after navigation, not just URL equality.
-Wait for the destination page to be fully loaded before checking the URL or content.
-Keep the login step isolated and reusable, instead of repeating login logic inside each scenario.
-Prefer route-based assertions such as expect(page).toHaveURL(//my/profile$/) instead of exact string matching where appropriate.
-Add a small helper method in the page object for the reusable navigation pattern.
-Ensure the test name matches the actual behavior clearly and consistently with the project naming convention.
-Avoid using magic strings like “My Profile”, “My Appointments” in multiple places; centralize them if possible.
-Consider splitting this into one smoke test and one data-driven navigation test for better maintainability.
-Validate whether the page loads different content after login, and assert a stable element on each page.
-Review whether this should run as a full E2E test or as a lighter navigation smoke test depending on product stability.

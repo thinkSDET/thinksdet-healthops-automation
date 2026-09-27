@@ -1,6 +1,7 @@
 import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { TestDataFactory } from '../../../src/utils/TestDataFactory'
 import { Routes } from '../../../src/constants/Routes'
+import { QuickAccessLabels } from '../../../src/constants/QuickAccessLabels'
 
 test(
     '[E2E-DASH-002] should navigate to the correct portal page when patient clicks a quick access card @P1 @tc:E2E-DASH-002',
@@ -8,10 +9,10 @@ test(
 
         const patientLogin = TestDataFactory.validPatientLogin();
         const quickAccessCases = [
-            { label: 'My Profile', navigate: () => dashboardPage.quickAccess.navigateToMyProfile(), expectedUrl: Routes.MY_PROFILE },
-            { label: 'My Appointments', navigate: () => dashboardPage.quickAccess.navigateToMyAppointments(), expectedUrl: Routes.MY_APPOINTMENTS },
-            { label: 'My Prescriptions', navigate: () => dashboardPage.quickAccess.navigateToMyPrescriptions(), expectedUrl: Routes.MY_PRESCRIPTIONS },
-            { label: 'My Orders', navigate: () => dashboardPage.quickAccess.navigateToMyOrders(), expectedUrl: Routes.MY_ORDERS }
+            { label: QuickAccessLabels.MY_PROFILE, navigate: () => dashboardPage.quickAccess.navigateToMyProfile(), expectedUrl: Routes.MY_PROFILE },
+            { label: QuickAccessLabels.MY_APPOINTMENTS, navigate: () => dashboardPage.quickAccess.navigateToMyAppointments(), expectedUrl: Routes.MY_APPOINTMENTS },
+            { label: QuickAccessLabels.MY_PRESCRIPTIONS, navigate: () => dashboardPage.quickAccess.navigateToMyPrescriptions(), expectedUrl: Routes.MY_PRESCRIPTIONS },
+            { label: QuickAccessLabels.MY_ORDERS, navigate: () => dashboardPage.quickAccess.navigateToMyOrders(), expectedUrl: Routes.MY_ORDERS }
         ];
 
         await page.goto(Routes.HOME);

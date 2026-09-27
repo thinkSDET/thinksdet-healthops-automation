@@ -1,5 +1,6 @@
 import { Locator, Page } from "playwright";
 import { BasePage } from "../BasePage";
+import { QuickAccessLabels } from "../../constants/QuickAccessLabels";
 
 export class QuickAccess extends BasePage {
 
@@ -9,10 +10,10 @@ export class QuickAccess extends BasePage {
     readonly myOrdersCard: Locator
     constructor(page: Page) {
         super(page);
-        this.myProfileCard = page.locator('.dashboard-card').filter({ hasText: 'My Profile' });
-        this.myAppointmentsCard = page.locator('.dashboard-card').filter({ hasText: 'My Appointments' });
-        this.myPrescriptionsCard = page.locator('.dashboard-card').filter({ hasText: 'My Prescriptions' });
-        this.myOrdersCard = page.locator('.dashboard-card').filter({ hasText: 'My Orders' });
+        this.myProfileCard = page.locator('.dashboard-card').filter({ hasText: QuickAccessLabels.MY_PROFILE });
+        this.myAppointmentsCard = page.locator('.dashboard-card').filter({ hasText: QuickAccessLabels.MY_APPOINTMENTS });
+        this.myPrescriptionsCard = page.locator('.dashboard-card').filter({ hasText: QuickAccessLabels.MY_PRESCRIPTIONS });
+        this.myOrdersCard = page.locator('.dashboard-card').filter({ hasText: QuickAccessLabels.MY_ORDERS });
     }
 
     async navigateToMyProfile() {
