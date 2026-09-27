@@ -8,7 +8,7 @@ test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @t
     const patientRegistration = TestDataFactory.patientRegstration()
 
     await test.step('Open app and create organization', async () => {
-        await page.goto('https://thinksdet.com/');
+        await page.goto('');
         await landingPage.navigateToCreateOrganization();
         await createOrgPage.createOrganization(organizationData);
     });
