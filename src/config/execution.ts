@@ -1,5 +1,7 @@
 // Runtime settings that control how tests execute in local runs and CI/CD pipelines.
 // These values are read from environment variables so the same suite can be reused across environments.
+const isCI = process.env.CI === "true" || process.env.CI === "1" || !!process.env.CI;
+
 export const runtime = {
 
     // ENV decides which URL from the environment map is used as baseURL.
@@ -7,13 +9,15 @@ export const runtime = {
 
     // BROWSER can be a single browser or a comma-separated list like "chromium,firefox".
     // CI defaults to "all" so the full browser matrix runs automatically in pipeline execution.
-    browser: process.env.BROWSER || (process.env.CI ? "all" : "chromium"),
+    browser: process.env.BROWSER || (isCI ? "all" : "chromium"),
 
     // workers controls test parallelism. CI usually runs with fewer workers to avoid resource strain.
-    workers: Number(process.env.WORKERS ?? (process.env.CI ? 2 : 3)),
+    workers: Number(process.env.WORKERS ?? (isCI ? 2 : 3)),
 
-    // Headless defaults to true for CI and local automation stability.
-    // If HEADLESS is explicitly set, that value wins.
-    headless: process.env.HEADLESS === undefined ? true : process.env.HEADLESS === "true"
+    // Local runs should stay visible in the browser by default.
+    // CI still prefers headless execution for speed and stability.
+    headless: process.env.HEADLESS !== undefined
+        ? process.env.HEADLESS === "true"
+        : isCI
 
 };
