@@ -1,8 +1,9 @@
 import { Locator, Page } from "playwright"
+import { BasePage } from "../BasePage";
+import { Routes } from "../../constants/Routes";
 
-export class LoginPage {
+export class LoginPage extends BasePage {
 
-    readonly page: Page
     readonly organizationCreatedMessage: Locator
     readonly emailAddress: Locator
     readonly password: Locator
@@ -10,7 +11,7 @@ export class LoginPage {
     readonly getStartedWithHealthOps : Locator
 
     constructor(page: Page) {
-        this.page = page
+        super(page);
         this.organizationCreatedMessage = page.getByText('Organization created successfully', { exact: false });
         this.emailAddress = page.getByPlaceholder('Enter your email')
         this.password = page.getByPlaceholder('Enter your password')
@@ -22,6 +23,7 @@ export class LoginPage {
         await this.emailAddress.pressSequentially(emailAddress, { delay: 100 })
         await this.password.pressSequentially(password, { delay: 100 })
         await this.signIn.click()
+        await this.waitForNavigation(Routes.DASHBOARD);
     }
 
     async navigateToGetStartedWithHealthOps(){

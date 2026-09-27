@@ -1,9 +1,10 @@
 import { Locator, Page } from "playwright";
 import { RegistrationData } from "../../types/RegistrationData";
+import { BasePage } from "../BasePage";
+import { Routes } from "../../constants/Routes";
 
-export class RegistrationPage {
+export class RegistrationPage extends BasePage {
 
-    readonly page: Page
     readonly firstName: Locator
     readonly lastName: Locator
     readonly emailAddress: Locator
@@ -16,7 +17,7 @@ export class RegistrationPage {
     readonly gender : Locator
     readonly createAccount : Locator
     constructor(page: Page) {
-        this.page = page
+        super(page);
         this.firstName = page.getByRole('textbox', { name: 'First Name', exact: true })
         this.lastName = page.getByRole('textbox', { name: 'Last Name', exact: true })
         this.emailAddress = page.getByRole('textbox', { name: 'Email address', exact: true })
@@ -42,5 +43,6 @@ export class RegistrationPage {
         await this.accountType.selectOption({ label: data.accountType })
         await this.gender.selectOption({ label: data.gender })
         await this.createAccount.click()
+        await this.waitForNavigation(Routes.LOGIN);
     }
 }

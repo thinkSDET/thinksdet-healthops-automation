@@ -10,4 +10,9 @@ adminLN@healthops.com
 12345678
 
 
+Scott123@healthops.com / 12345678 -> Patient
+
+
 1. Test case name, naming converntions ka rule.
+
+

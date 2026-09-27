@@ -1,8 +1,9 @@
-import { expect } from 'playwright/test'
-import { test } from '../../../src/fixtures/pageObjectFixture'
+
+import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { TestDataFactory } from '../../../src/utils/TestDataFactory'
 import { LoginMessages } from '../../../src/constants/LoginMessages'
 import { createOrganization } from '../../../src/constants/CreateOrganization'
+import { Routes } from '../../../src/constants/Routes'
 import testData from '../../../src/test-data/organization-registration.json'
 
 test.describe('Authentication & Account Security @module:auth @feature:organization-onboarding', () => {
@@ -10,7 +11,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
     test.skip('[MOD-AUTH-001] [E2E-AUTH-001] should onboard organization via UI and sign in as admin @P0 @tc:MOD-AUTH-001', async ({ page, landingPage, createOrgPage, loginPage }) => {
         let organizationData: any
         await test.step('Navigate to organization onboarding', async () => {
-            await page.goto('');
+            await page.goto(Routes.HOME);
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create organization', async () => {
@@ -24,7 +25,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         });
         await test.step('Verify organization creation redirects to login', async () => {
             await expect(page).toHaveURL(
-                'https://thinksdet.com/login'
+                Routes.LOGIN
             );
         });
         await test.step('Login as organization admin', async () => {
@@ -35,7 +36,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         });
         await test.step('Verify dashboard is displayed', async () => {
             await expect(page).toHaveURL(
-                'https://thinksdet.com/dashboard'
+                Routes.DASHBOARD
             );
         });
     })
@@ -43,7 +44,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
     test.skip('[NEG-AUTH-003] should reject organization onboarding when workspaceCode already exists @P0 @tc:NEG-AUTH-003', async ({ page, landingPage, createOrgPage, loginPage }) => {
         let existingWorkspaceCode: string | undefined
         await test.step('Navigate to organization onboarding', async () => {
-            await page.goto('');
+            await page.goto(Routes.HOME);
             await landingPage.navigateToCreateOrganization();
         });
         await test.step('Create an existing organization', async () => {
@@ -66,7 +67,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
 
     test('[NEG-AUTH-002] should reject organization onboarding when workspace code contains spaces @P0 @tc:NEG-AUTH-002', async ({ page, landingPage, createOrgPage }) => {
 
-        await page.goto('');
+        await page.goto(Routes.HOME);
         await landingPage.navigateToCreateOrganization();
         const organizationData  = TestDataFactory.validOrganization();
         organizationData.workspaceCode = testData.invalidWorkspaceCode.workspaceCode

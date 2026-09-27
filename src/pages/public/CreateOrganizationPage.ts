@@ -1,9 +1,10 @@
 import { Locator, Page } from "playwright"
 import { OrganizationData } from "../../types/OrganizationData"
+import { BasePage } from "../BasePage";
+import { Routes } from "../../constants/Routes";
 
-export class CreateOrganizationPage {
+export class CreateOrganizationPage extends BasePage {
 
-    readonly page: Page
     readonly organizationName: Locator
     readonly workSpaceCode: Locator
     readonly adminFirstName: Locator
@@ -16,7 +17,7 @@ export class CreateOrganizationPage {
     readonly invalidWorkspaceCode : Locator
 
     constructor(page: Page) {
-        this.page = page
+        super(page);
         this.organizationName = page.getByRole('textbox', { name: 'Organization Name' })
         this.workSpaceCode = page.getByRole('textbox', { name: 'Workspace Code (optional)' })
         this.adminFirstName = page.getByRole('textbox', { name: 'Admin First Name' })
@@ -41,5 +42,6 @@ export class CreateOrganizationPage {
         await this.password.fill(data.password)
         await this.confirmPassword.fill(data.confirmPassword)
         await this.createOrganizationButton.click()
+        await this.waitForNavigation(Routes.LOGIN);
     }
 }

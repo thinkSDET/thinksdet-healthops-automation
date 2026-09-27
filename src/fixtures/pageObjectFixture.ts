@@ -1,4 +1,4 @@
-import {test as base} from '@playwright/test'
+import {test as base, expect} from '@playwright/test'
 import { LandingPage } from '../pages/public/LandingPage'
 import { CreateOrganizationPage } from '../pages/public/CreateOrganizationPage'
 import { LoginPage } from '../pages/public/LoginPage'
@@ -36,3 +36,5 @@ export const test = base.extend<pageObjectFixture>({
         await use(new RegistrationPage(page))
     }
 })
+
+export { expect }
