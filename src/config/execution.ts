@@ -1,6 +1,6 @@
 // Runtime settings that control how tests execute in local runs and CI/CD pipelines.
 // These values are read from environment variables so the same suite can be reused across environments.
-const isCI = process.env.CI === "true" || process.env.CI === "1" || !!process.env.CI;
+const isCI = !!process.env.CI;
 
 export const runtime = {
 

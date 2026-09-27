@@ -145,3 +145,41 @@ Examples:
   - If the value is missing, it falls back to the CI/local default.
 
 This makes the framework easier to manage and much more CI/CD friendly.
+
+## 6. Important command note for cross-platform environment variables
+
+To run environment-based scripts across Windows, Linux, and macOS, the project uses:
+
+```bash
+npm install -D cross-env
+```
+
+Why this is important:
+
+- `cross-env` lets you set environment variables in a cross-platform way.
+- Without it, commands like `ENV=stage` may fail on Windows PowerShell.
+- This is especially important when running Playwright scripts from local machines and CI/CD pipelines.
+
+Example:
+
+```json
+"scripts": {
+  "test:stage": "cross-env ENV=stage playwright test"
+}
+```
+
+This works reliably because `cross-env` translates the environment setting correctly for each OS.
+
+What does `-D` mean?
+
+- `-D` is short for `--save-dev`
+- It installs the package as a development dependency.
+- This means it is only needed for development, testing, and CI work.
+- It is not part of the application runtime.
+
+So in this project:
+
+- `playwright` and `dotenv` are runtime-related packages
+- `@playwright/test`, `@types/node`, and `cross-env` are dev/test tools
+
+This is why developer tools are added with `-D`.

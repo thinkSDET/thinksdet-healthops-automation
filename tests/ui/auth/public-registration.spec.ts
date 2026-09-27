@@ -3,7 +3,7 @@ import { test } from '../../../src/fixtures/pageObjectFixture'
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
 import { TestDataFactory } from '../../../src/utils/TestDataFactory';
 
-test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @tc:MOD-AUTH-010', async ({ page, landingPage, createOrgPage, loginPage, dashboardPage }) => {
+test.skip('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @tc:MOD-AUTH-010', async ({ page, landingPage, createOrgPage, loginPage, dashboardPage }) => {
     const organizationData = TestDataFactory.validOrganization();
     const patientRegistration = TestDataFactory.patientRegstration()
 

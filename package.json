@@ -5,7 +5,10 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^26.6.3"
+    "@types/node": "^26.6.3",
+    "cross-env": "^10.1.0"
   },
-  "scripts": {}
+  "scripts": {
+    "test:stage": "cross-env ENV=stage playwright test"
+  }
 }
