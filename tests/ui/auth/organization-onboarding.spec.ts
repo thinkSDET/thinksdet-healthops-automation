@@ -1,5 +1,5 @@
-import { expect } from 'playwright/test'
-import { test } from '../../../src/fixtures/pageObjectFixture'
+
+import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { TestDataFactory } from '../../../src/utils/TestDataFactory'
 import { LoginMessages } from '../../../src/constants/LoginMessages'
 import { createOrganization } from '../../../src/constants/CreateOrganization'

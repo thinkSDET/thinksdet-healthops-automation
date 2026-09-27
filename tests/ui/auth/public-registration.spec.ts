@@ -1,5 +1,5 @@
-import { expect } from 'playwright/test';
-import { test } from '../../../src/fixtures/pageObjectFixture'
+
+import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
 import { TestDataFactory } from '../../../src/utils/TestDataFactory';
 
