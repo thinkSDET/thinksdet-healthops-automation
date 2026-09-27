@@ -2,7 +2,6 @@ import { expect } from 'playwright/test';
 import { test } from '../../../src/fixtures/pageObjectFixture'
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
 import { TestDataFactory } from '../../../src/utils/TestDataFactory';
-import { LoginPage } from '../../../src/pages/public/LoginPage';
 
 test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @tc:MOD-AUTH-010', async ({ page, landingPage, createOrgPage, loginPage, dashboardPage }) => {
     const organizationData = TestDataFactory.validOrganization();
@@ -14,8 +13,6 @@ test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @t
         await createOrgPage.createOrganization(organizationData);
     });
     await test.step('Login as workspace admin', async () => {
-        console.log(organizationData.adminEmail)
-        console.log(organizationData.password)
         await loginPage.login(organizationData.adminEmail, organizationData.password);
     });
 
@@ -31,7 +28,6 @@ test('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @t
     await test.step('Login as registered patient and verify dashboard access', async () => {
         await page.bringToFront()
         await page.goto('https://thinksdet.com/login');
-        console.log(patientRegistration.emailAddress)
         await loginPage.login(patientRegistration.emailAddress, patientRegistration.password);
         await expect(page).toHaveURL('https://thinksdet.com/dashboard')
         await expect(dashboardPage.header.appUserName).toHaveText(`${patientRegistration.firstName} ${patientRegistration.lastName}`)
