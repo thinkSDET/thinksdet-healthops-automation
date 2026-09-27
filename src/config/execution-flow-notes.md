@@ -126,4 +126,22 @@ This design keeps the same test suite reusable across local validation and autom
 - `WORKERS` decides how many tests run together.
 - `HEADLESS` decides whether the browser is visible or hidden.
 
+### What `||` does in these config values
+
+The `||` operator is a fallback mechanism in JavaScript.
+
+Examples:
+
+- `process.env.ENV || "qa"`
+  - If `ENV` is set, it wins.
+  - If not, the framework automatically uses `qa`.
+
+- `process.env.BROWSER || (isCI ? "all" : "chromium")`
+  - If `BROWSER` is set, that browser is used.
+  - If not, CI uses `all` and local runs default to `chromium`.
+
+- `process.env.WORKERS ?? (isCI ? 2 : 3)`
+  - `??` means use the left value only when it is not `null` or `undefined`.
+  - If the value is missing, it falls back to the CI/local default.
+
 This makes the framework easier to manage and much more CI/CD friendly.
