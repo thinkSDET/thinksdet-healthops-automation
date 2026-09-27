@@ -1,9 +1,12 @@
 import { expect, test } from '../../../src/fixtures/pageObjectFixture'
+import { TestDataFactory } from '../../../src/utils/TestDataFactory'
+
 test('[E2E-DASH-002] should navigate to the correct portal page when patient clicks a quick access card @P1 @tc:E2E-DASH-002', async ({ page, landingPage, loginPage, dashboardPage }) => {
+    const patientLogin = TestDataFactory.validPatientLogin();
+
     await page.goto('')
     await landingPage.navigateToLoginPage()
-    await loginPage.login("Scott123@healthops.com", "12345678")
-    //====
+    await loginPage.login(patientLogin.emailAddress, patientLogin.password)
 
     await test.step('Navigate to My Profile', async () => {
         await dashboardPage.quickAccess.navigateToMyProfile();

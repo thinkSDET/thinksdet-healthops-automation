@@ -22,4 +22,11 @@ export class TestDataFactory {
         }
 
     }
+
+    static validPatientLogin(): { emailAddress: string; password: string } {
+        return {
+            emailAddress: 'Scott123@healthops.com',
+            password: '12345678'
+        };
+    }
 }
