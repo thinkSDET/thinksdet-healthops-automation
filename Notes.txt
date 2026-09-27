@@ -16,10 +16,7 @@ Scott123@healthops.com / 12345678 -> Patient
 1. Test case name, naming converntions ka rule.
 
 
-Replace hard-coded absolute URLs with base URL + route constants or environment config.
-Avoid repeated page.goBack() calls; they make the flow brittle and dependent on browser history.
 Add explicit visibility assertions before clicking each quick-access card.
-Use a parameterized test table instead of repeating the same logic four times.
 Assert on page content after navigation, not just URL equality.
 Wait for the destination page to be fully loaded before checking the URL or content.
 Keep the login step isolated and reusable, instead of repeating login logic inside each scenario.

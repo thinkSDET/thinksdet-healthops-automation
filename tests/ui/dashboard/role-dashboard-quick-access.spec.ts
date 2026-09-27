@@ -7,6 +7,12 @@ test(
     async ({ page, landingPage, loginPage, dashboardPage }) => {
 
         const patientLogin = TestDataFactory.validPatientLogin();
+        const quickAccessCases = [
+            { label: 'My Profile', navigate: () => dashboardPage.quickAccess.navigateToMyProfile(), expectedUrl: Routes.MY_PROFILE },
+            { label: 'My Appointments', navigate: () => dashboardPage.quickAccess.navigateToMyAppointments(), expectedUrl: Routes.MY_APPOINTMENTS },
+            { label: 'My Prescriptions', navigate: () => dashboardPage.quickAccess.navigateToMyPrescriptions(), expectedUrl: Routes.MY_PRESCRIPTIONS },
+            { label: 'My Orders', navigate: () => dashboardPage.quickAccess.navigateToMyOrders(), expectedUrl: Routes.MY_ORDERS }
+        ];
 
         await page.goto(Routes.HOME);
         await landingPage.navigateToLoginPage();
@@ -15,28 +21,12 @@ test(
             patientLogin.password
         );
 
-        await test.step('Navigate to My Profile', async () => {
-            await dashboardPage.quickAccess.navigateToMyProfile();
-            await expect(page).toHaveURL(Routes.MY_PROFILE);
-            await page.goBack();
-        });
-
-        await test.step('Navigate to My Appointments', async () => {
-            await dashboardPage.quickAccess.navigateToMyAppointments();
-            await expect(page).toHaveURL(Routes.MY_APPOINTMENTS);
-            await page.goBack();
-        });
-
-        await test.step('Navigate to My Prescriptions', async () => {
-            await dashboardPage.quickAccess.navigateToMyPrescriptions();
-            await expect(page).toHaveURL(Routes.MY_PRESCRIPTIONS);
-            await page.goBack();
-        });
-
-        await test.step('Navigate to My Orders', async () => {
-            await dashboardPage.quickAccess.navigateToMyOrders();
-            await expect(page).toHaveURL(Routes.MY_ORDERS);
-            await page.goBack();
-        });
+        for (const quickAccessCase of quickAccessCases) {
+            await test.step(`Navigate to ${quickAccessCase.label}`, async () => {
+                await page.goto(Routes.DASHBOARD);
+                await quickAccessCase.navigate();
+                await expect(page).toHaveURL(quickAccessCase.expectedUrl);
+            });
+        }
     }
 );
