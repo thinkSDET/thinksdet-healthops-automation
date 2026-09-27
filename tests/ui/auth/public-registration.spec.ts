@@ -2,6 +2,7 @@
 import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { RegistrationPage } from '../../../src/pages/public/RegistrationPage';
 import { TestDataFactory } from '../../../src/utils/TestDataFactory';
+import { Routes } from '../../../src/constants/Routes';
 
 test.skip('[MOD-AUTH-010] should register a patient into an existing workspace @P0 @tc:MOD-AUTH-010', async ({ page, landingPage, createOrgPage, loginPage, dashboardPage }) => {
     const organizationData = TestDataFactory.validOrganization();
@@ -27,9 +28,9 @@ test.skip('[MOD-AUTH-010] should register a patient into an existing workspace @
 
     await test.step('Login as registered patient and verify dashboard access', async () => {
         await page.bringToFront()
-        await page.goto('https://thinksdet.com/login');
+        await page.goto(Routes.LOGIN);
         await loginPage.login(patientRegistration.emailAddress, patientRegistration.password);
-        await expect(page).toHaveURL('https://thinksdet.com/dashboard')
+        await expect(page).toHaveURL(Routes.DASHBOARD)
         await expect(dashboardPage.header.appUserName).toHaveText(`${patientRegistration.firstName} ${patientRegistration.lastName}`)
         await expect(dashboardPage.header.appUserRole).toHaveText(`${patientRegistration.accountType}`,{ignoreCase :true})
     });

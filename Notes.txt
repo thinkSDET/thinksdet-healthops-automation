@@ -16,9 +16,6 @@ Scott123@healthops.com / 12345678 -> Patient
 1. Test case name, naming converntions ka rule.
 
 
-
-List of fixes for this test case
-Replace hard-coded credentials with test data from a central source.
 Replace hard-coded absolute URLs with base URL + route constants or environment config.
 Avoid repeated page.goBack() calls; they make the flow brittle and dependent on browser history.
 Add explicit visibility assertions before clicking each quick-access card.

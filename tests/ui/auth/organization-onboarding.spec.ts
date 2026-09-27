@@ -3,6 +3,7 @@ import { expect, test } from '../../../src/fixtures/pageObjectFixture'
 import { TestDataFactory } from '../../../src/utils/TestDataFactory'
 import { LoginMessages } from '../../../src/constants/LoginMessages'
 import { createOrganization } from '../../../src/constants/CreateOrganization'
+import { Routes } from '../../../src/constants/Routes'
 import testData from '../../../src/test-data/organization-registration.json'
 
 test.describe('Authentication & Account Security @module:auth @feature:organization-onboarding', () => {
@@ -24,7 +25,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         });
         await test.step('Verify organization creation redirects to login', async () => {
             await expect(page).toHaveURL(
-                'https://thinksdet.com/login'
+                Routes.LOGIN
             );
         });
         await test.step('Login as organization admin', async () => {
@@ -35,7 +36,7 @@ test.describe('Authentication & Account Security @module:auth @feature:organizat
         });
         await test.step('Verify dashboard is displayed', async () => {
             await expect(page).toHaveURL(
-                'https://thinksdet.com/dashboard'
+                Routes.DASHBOARD
             );
         });
     })
