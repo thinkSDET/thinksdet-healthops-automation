@@ -183,3 +183,58 @@ So in this project:
 - `@playwright/test`, `@types/node`, and `cross-env` are dev/test tools
 
 This is why developer tools are added with `-D`.
+
+## 7. How each npm script works
+
+Each script in `package.json` is a shortcut command for running Playwright with the correct environment.
+
+### `npm run test:run`
+
+```bash
+npx playwright test
+```
+
+- Runs the default Playwright suite.
+- Uses the configuration from `playwright.config.ts`.
+- No environment override is passed, so the project uses the default `ENV` value from `execution.ts`, which is usually `qa`.
+- This is the standard command for running the entire suite locally.
+
+### `npm run test:qa`
+
+```bash
+cross-env ENV=qa playwright test
+```
+
+- `cross-env` sets the environment variable `ENV=qa` in a way that works on Windows, Linux, and macOS.
+- Then Playwright runs using `qa` as the selected environment.
+- In `environment.ts`, `qa` points to the QA URL.
+- So this command is used to run the suite against QA.
+
+### `npm run test:stage`
+
+```bash
+cross-env ENV=stage playwright test
+```
+
+- Sets `ENV=stage` before execution.
+- `playwright.config.ts` reads the value from `runtime.env`.
+- That makes the framework point to the staging URL instead of QA.
+- This is useful for validating staging-specific behavior.
+
+### `npm run test:preprod`
+
+```bash
+cross-env ENV=preprod playwright test
+```
+
+- Sets `ENV=preprod` before execution.
+- The framework will use the preprod URL from `environment.ts`.
+- This is typically used before production release to validate the preproduction environment.
+
+### Simple understanding
+
+- `ENV` tells the framework which URL to target.
+- `cross-env` ensures the variable is set correctly on all operating systems.
+- Playwright then reads that value and uses it in the config.
+
+This keeps the automation reusable and easy to run against different environments with a single command.

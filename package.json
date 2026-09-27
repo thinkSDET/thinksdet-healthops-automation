@@ -9,6 +9,9 @@
     "cross-env": "^10.1.0"
   },
   "scripts": {
-    "test:stage": "cross-env ENV=stage playwright test"
+    "test:run": "npx playwright test",
+    "test:qa": "cross-env ENV=qa playwright test",
+    "test:stage": "cross-env ENV=stage playwright test",
+     "test:preprod": "cross-env ENV=preprod playwright test"
   }
 }
