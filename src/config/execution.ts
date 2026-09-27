@@ -12,12 +12,10 @@ export const runtime = {
     browser: process.env.BROWSER || (isCI ? "all" : "chromium"),
 
     // workers controls test parallelism. CI usually runs with fewer workers to avoid resource strain.
-    workers: Number(process.env.WORKERS ?? (isCI ? 2 : 3)),
+    workers: Number(process.env.WORKERS ?? (isCI ? 2 : 1)),
 
     // Local runs should stay visible in the browser by default.
     // CI still prefers headless execution for speed and stability.
-    headless: process.env.HEADLESS !== undefined
-        ? process.env.HEADLESS === "true"
-        : isCI
+    headless: process.env.HEADLESS !== undefined ? process.env.HEADLESS === "true" : isCI
 
 };
