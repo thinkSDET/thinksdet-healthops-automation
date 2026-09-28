@@ -1,0 +1,81 @@
+name: Playwright Basic CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Select environment
+        required: true
+        type: choice
+        options:
+          - qa
+          - stage
+          - preprod
+      browser:
+        description: Select browser
+        required: true
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+          - all
+      workers:
+        description: Number of workers
+        required: true
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - "4"
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      ENV: ${{ github.event.inputs.environment }}
+      BROWSER: ${{ github.event.inputs.browser }}
+      WORKERS: ${{ github.event.inputs.workers }}
+      CI: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npm run test:run
+
+      - name: Generate Allure report
+        if: always()
+        run: npx allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.event.inputs.environment }}-${{ github.event.inputs.browser }}
+          path: allure-report
+          retention-days: 14
+
+      - name: Upload raw test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results-${{ github.event.inputs.environment }}-${{ github.event.inputs.browser }}
+          path: |
+            test-results
+            allure-results
+          retention-days: 14

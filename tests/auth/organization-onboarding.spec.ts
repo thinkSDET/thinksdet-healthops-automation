@@ -1,10 +1,10 @@
 
-import { expect, test } from '../../../src/fixtures/pageObjectFixture'
-import { TestDataFactory } from '../../../src/utils/TestDataFactory'
-import { LoginMessages } from '../../../src/constants/LoginMessages'
-import { createOrganization } from '../../../src/constants/CreateOrganization'
-import { Routes } from '../../../src/constants/Routes'
-import testData from '../../../src/test-data/organization-registration.json'
+import { expect, test } from '../../src/fixtures/pageObjectFixture'
+import { TestDataFactory } from '../../src/utils/TestDataFactory'
+import { LoginMessages } from '../../src/constants/LoginMessages'
+import { createOrganization } from '../../src/constants/CreateOrganization'
+import { Routes } from '../../src/constants/Routes'
+import testData from '../../src/test-data/organization-registration.json'
 
 test.describe('Authentication & Account Security @module:auth @feature:organization-onboarding', () => {
 
