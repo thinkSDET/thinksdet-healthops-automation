@@ -1,10 +1,9 @@
-import {test as base, expect} from '@playwright/test'
+import { test as base, expect } from '@playwright/test'
 import { LandingPage } from '../pages/public/LandingPage'
 import { CreateOrganizationPage } from '../pages/public/CreateOrganizationPage'
 import { LoginPage } from '../pages/public/LoginPage'
 import { DashboardPage } from '../pages/Dashboard/DashboardPage'
 import { RegistrationPage } from '../pages/public/RegistrationPage'
-
 
 type pageObjectFixture = {
 
@@ -14,7 +13,6 @@ type pageObjectFixture = {
     dashboardPage : DashboardPage
     registrationPage : RegistrationPage
 }
-
 
 export const test = base.extend<pageObjectFixture>({
  
