@@ -40,8 +40,11 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   // Use runtime-defined worker count so local and CI parallelism can be tuned separately.
   workers: runtime.workers,
-  // Default HTML reporter is enough for local debugging and basic test result review.
-  reporter: 'html',
+  // Default Allure reporter is enough for local debugging and basic test result review.
+  reporter: [
+    ['list'],
+    ['allure-playwright']
+  ],
   // Shared settings used by all selected projects.
   use: {
     // baseURL is chosen from the current environment (qa/stage/preprod).

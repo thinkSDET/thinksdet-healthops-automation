@@ -1,7 +1,7 @@
-import { expect, test } from '../../../src/fixtures/pageObjectFixture'
-import { TestDataFactory } from '../../../src/utils/TestDataFactory'
-import { Routes } from '../../../src/constants/Routes'
-import { QuickAccessLabels } from '../../../src/constants/QuickAccessLabels'
+import { expect, test } from '../../src/fixtures/pageObjectFixture'
+import { TestDataFactory } from '../../src/utils/TestDataFactory'
+import { Routes } from '../../src/constants/Routes'
+import { QuickAccessLabels } from '../../src/constants/QuickAccessLabels'
 
 test(
     '[E2E-DASH-002] should navigate to the correct portal page when patient clicks a quick access card @P1 @tc:E2E-DASH-002',

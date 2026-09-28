@@ -6,12 +6,14 @@
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.3",
+    "allure-commandline": "^2.46.1",
+    "allure-playwright": "^3.12.2",
     "cross-env": "^10.1.0"
   },
   "scripts": {
     "test:run": "npx playwright test",
     "test:qa": "cross-env ENV=qa playwright test",
     "test:stage": "cross-env ENV=stage playwright test",
-     "test:preprod": "cross-env ENV=preprod playwright test"
+    "test:preprod": "cross-env ENV=preprod playwright test"
   }
 }
