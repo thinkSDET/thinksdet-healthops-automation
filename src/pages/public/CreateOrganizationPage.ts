@@ -42,6 +42,5 @@ export class CreateOrganizationPage extends BasePage {
         await this.password.fill(data.password)
         await this.confirmPassword.fill(data.confirmPassword)
         await this.createOrganizationButton.click()
-        await this.waitForNavigation(Routes.LOGIN);
     }
 }
