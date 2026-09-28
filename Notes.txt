@@ -1,5 +1,5 @@
-admin123@healthops.local / 12345678
-admin1790260713160@healthops.com / Test@12345
+admin123@healthops.local / 12345678    -> Workspace A
+admin1790260713160@healthops.com / Test@12345  -> Workspace B
 
 
 ===
